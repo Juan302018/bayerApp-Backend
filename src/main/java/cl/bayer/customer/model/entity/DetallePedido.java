@@ -33,6 +33,10 @@ public class DetallePedido implements Serializable {
 	@JoinColumn(name = "id_compra",foreignKey = @ForeignKey(name = "FK_compra"))
 	private Compra compra;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_material",foreignKey = @ForeignKey(name = "FK_material"))
+	private Material material;
+	
 	@NotNull
 	private int cantidad;
 	

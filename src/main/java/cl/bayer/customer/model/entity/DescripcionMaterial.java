@@ -11,56 +11,61 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="tipo_semilla")
-public class TipoSemilla implements Serializable {
-	
+@Table(name="descripcion_material")
+public class DescripcionMaterial implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@Column(name = "id_tipo")
+	@Column(name = "id_descripcion_material")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "id_especie",foreignKey = @ForeignKey(name = "FK_especie"))
-	private EspecieSemilla especieSemilla;
+	@JoinColumn(name = "id_material",foreignKey = @ForeignKey(name = "FK_material"))
+	private Material material;
 	
-	@NotEmpty
-	@Column(name="nombre_tipo")
-	private String nombreTipo;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_tipo",foreignKey = @ForeignKey(name = "FK_tipo"))
+	private TipoSemilla tipoSemilla;
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public EspecieSemilla getEspecieSemilla() {
-		return especieSemilla;
+
+	public Material getMaterial() {
+		return material;
 	}
 
-	public void setEspecieSemilla(EspecieSemilla especieSemilla) {
-		this.especieSemilla = especieSemilla;
+
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
 
-	public String getNombreTipo() {
-		return nombreTipo;
+
+	public TipoSemilla getTipoSemilla() {
+		return tipoSemilla;
 	}
 
-	public void setNombreTipo(String nombreTipo) {
-		this.nombreTipo = nombreTipo;
+
+	public void setTipoSemilla(TipoSemilla tipoSemilla) {
+		this.tipoSemilla = tipoSemilla;
 	}
+	
 	
 	
 
