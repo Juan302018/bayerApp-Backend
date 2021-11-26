@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import cl.bayer.customer.servicess.IMaterialService;
 import  cl.bayer.customer.exception.ModelNotFoundException;
-import cl.bayer.customer.model.Material;;
+import cl.bayer.customer.model.entity.Material;
+import cl.bayer.customer.services.IMaterialService;;
 
 @RestController
 @RequestMapping("/material")
@@ -29,7 +29,7 @@ public class MaterialController {
 	
 	@GetMapping
 	public ResponseEntity<List<Material>> listarMateriales() {
-		List<Material> lista = service.listar();
+		List<Material> lista = service.findAll();
 		if (!lista.isEmpty()) {
 			return new ResponseEntity<List<Material>>(lista, HttpStatus.OK);
 		} else {
@@ -39,24 +39,24 @@ public class MaterialController {
 	
 	@PostMapping
 	public ResponseEntity<Material> registrar(@RequestBody Material material){
-		Material objMaterial = service.registrar(material);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(material.getIdMaterial()).toUri();
+		Material objMaterial = service.save(material);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(material.getId()).toUri();
 		return ResponseEntity.created(location).build();
      }
 	
 	@PutMapping
 	public ResponseEntity<Material> modificar(@RequestBody Material material){
-		Material objMaterial = service.modificar(material);
+		Material objMaterial = service.save(material);
 		return new ResponseEntity<Material>(objMaterial, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Material> eliminar(@PathVariable("id") Long id) {
-		Material material = service.leerPorId(id);
-		if (material.getIdMaterial() == null) {
+		Material material = service.findById(id);
+		if (material.getId() == null) {
 			throw new ModelNotFoundException("ID SUPERHEROE NO ENCONTRADO!" + id);
 		}
-		service.eliminar(id);
+		service.delete(id);
 		return new ResponseEntity<Material>(HttpStatus.OK);
 	}
 }

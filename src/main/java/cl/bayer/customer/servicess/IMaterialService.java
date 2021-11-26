@@ -1,7 +1,18 @@
-package cl.bayer.customer.servicess;
+package cl.bayer.customer.services;
 
-import cl.bayer.customer.model.Material;
+import java.util.List;
 
-public interface IMaterialService extends ICRUD<Material> {
+import cl.bayer.customer.model.entity.Material;
+
+
+public interface IMaterialService{
+	
+public List<Material> findAll();
+	
+	public Material findById(Long id);
+	
+	public Material save(Material material);
+	
+	public void delete(Long id);
 
 }
