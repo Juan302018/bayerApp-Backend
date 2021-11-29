@@ -30,7 +30,7 @@ public class Envase implements Serializable{
 	private String tipoEnvase;
 	
 	@Column(name = "activo")
-	private int activo;
+	private Integer activo;
 
 	public Long getId() {
 		return id;
@@ -48,7 +48,7 @@ public class Envase implements Serializable{
 		this.tipoEnvase = tipoEnvase;
 	}
 
-	public int getActivo() {
+	public Integer getActivo() {
 		return activo;
 	}
 

@@ -45,17 +45,15 @@ public class FiltroController {
 	@GetMapping
 	public ResponseEntity<FiltroDTO> listarFiltros() {
 		FiltroDTO filtro = new FiltroDTO();
-		List<Material> materiales = serviceMaterial.findAll();
-	    List<Envase> envases = serviceEnvase.findAll();
+		/*List<Material> materiales = serviceMaterial.findAll();
+	    List<Envase> envases = serviceEnvase.findAll();*/
 		List<EspecieSemilla> especies = serviceEspecie.findAll();
 		List<TipoSemilla> tipos = serviceTipo.findAll();
 		List<VariedadSemilla> variadades = serviceVariedad.findAll();
-		filtro.setMateriales(materiales);
-		filtro.setEnvases(envases);
 		filtro.setEspecies(especies);
 		filtro.setTipos(tipos);
 		filtro.setVariadades(variadades);
-		if ( !materiales.isEmpty() && !envases.isEmpty() && !especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty()) {
+		if (!especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
