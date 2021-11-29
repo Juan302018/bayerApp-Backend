@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="tipo_semilla")
 public class TipoSemilla implements Serializable {
@@ -32,6 +34,7 @@ public class TipoSemilla implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_especie",foreignKey = @ForeignKey(name = "FK_especie"))
+	@JsonBackReference
 	private EspecieSemilla especieSemilla;
 	
 	@NotEmpty

@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="variedad_semilla")
 public class VariedadSemilla implements Serializable {
@@ -34,6 +37,7 @@ public class VariedadSemilla implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_tipo",foreignKey = @ForeignKey(name = "FK_tipo"))
+	@JsonBackReference
 	private TipoSemilla tipoSemilla;
 
 	public Long getId() {
