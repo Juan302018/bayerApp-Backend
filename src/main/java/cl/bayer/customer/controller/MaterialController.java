@@ -54,7 +54,7 @@ public class MaterialController {
 	public ResponseEntity<Material> eliminar(@PathVariable("id") Long id) {
 		Material material = service.findById(id);
 		if (material.getId() == null) {
-			throw new ModelNotFoundException("ID SUPERHEROE NO ENCONTRADO!" + id);
+			throw new ModelNotFoundException("ID MATERIAL NO ENCONTRADO!" + id);
 		}
 		service.delete(id);
 		return new ResponseEntity<Material>(HttpStatus.OK);

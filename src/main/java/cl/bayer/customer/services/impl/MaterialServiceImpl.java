@@ -1,4 +1,4 @@
-package cl.bayer.customer.services;
+package cl.bayer.customer.services.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cl.bayer.customer.model.dao.IMaterialDao;
 import cl.bayer.customer.model.entity.Material;
+import cl.bayer.customer.services.IMaterialService;
 
 @Service
 public class MaterialServiceImpl implements IMaterialService{
