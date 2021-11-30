@@ -40,6 +40,24 @@ public class MaterialServiceImpl implements IMaterialService{
 		materialDao.deleteById(id);
 		
 	}
+	@Override
+	@Transactional(readOnly=true)
+	public List<Material> findByEspecie(Long idEspecie) {
+		
+		return materialDao.listarMaterialesPorEspecie(idEspecie);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Material> findByTipo(Long idTipo) {
+		return materialDao.listarMaterialesPorTipo(idTipo);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Material> findByVariedad(Long idVariedad) {
+		return materialDao.listarMaterialesPorVariedad(idVariedad);
+	}
 
 	
 }
