@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="material")
 public class Material implements Serializable{
@@ -38,26 +40,32 @@ public class Material implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_tipo",foreignKey = @ForeignKey(name = "fk_tipo_semilla_material"))
+	@JsonBackReference
 	private TipoSemilla tipoSemilla;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_especie",foreignKey = @ForeignKey(name = "fk_especie_semilla_material"))
+	@JsonBackReference
 	private EspecieSemilla especieSemilla;;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_variedad",foreignKey = @ForeignKey(name = "fk_variedad_semilla_material"))
+	@JsonBackReference
 	private VariedadSemilla variedadSemilla;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_envase",foreignKey = @ForeignKey(name = "fk_envase_material"))
+	@JsonBackReference
 	private Envase envase;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_unidad",foreignKey = @ForeignKey(name = "fk_unidad_material"))
+	@JsonBackReference
 	private Unidad unidad;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_precio_material",foreignKey = @ForeignKey(name = "fk_precio_material"))
+	@JsonBackReference
 	private PreciosPorMaterial preciosPorMaterial;
 
 	public Long getId() {
@@ -131,4 +139,5 @@ public class Material implements Serializable{
 	public void setPreciosPorMaterial(PreciosPorMaterial preciosPorMaterial) {
 		this.preciosPorMaterial = preciosPorMaterial;
 	}
+	
 }

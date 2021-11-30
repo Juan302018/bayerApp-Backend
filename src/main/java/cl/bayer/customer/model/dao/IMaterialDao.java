@@ -10,13 +10,13 @@ import cl.bayer.customer.model.entity.Material;
 
 public interface IMaterialDao extends CrudRepository<Material, Long> {
 
-	@Query("from Material mate where mate.especie.id_especie =:idEspecie")
+	@Query("from Material mate where mate.especieSemilla.id =:idEspecie")
 	List<Material> listarMaterialesPorEspecie(@Param("idEspecie") Long idEspecie);
 	
-	@Query("from Material mate where mate.tipo.id_tipo =:idTipo")
+	@Query("from Material mate where mate.tipoSemilla.id =:idTipo")
 	List<Material> listarMaterialesPorTipo(@Param("idTipo") Long idTipo);
 	
-	@Query("from Material mate where mate.variedad.id_variedad =:idVariedad")
+	@Query("from Material mate where mate.variedadSemilla.id =:idVariedad")
 	List<Material> listarMaterialesPorVariedad(@Param("idVariedad") Long idVariedad);
 
 }
