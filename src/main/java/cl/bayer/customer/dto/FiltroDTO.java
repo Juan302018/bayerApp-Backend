@@ -11,10 +11,14 @@ import cl.bayer.customer.model.entity.VariedadSemilla;
 public class FiltroDTO {
 	
 	private List<Material> materiales;
+	private List<Material> materialesPorEspecies;
+	private List<Material> materialesPortipos;
+	private List<Material> materialesPorVariedad;
 	private List<Envase> envases;
 	private List<EspecieSemilla> especies;
 	private List<TipoSemilla> tipos;
 	private List<VariedadSemilla> variadades;
+	
 	public List<Material> getMateriales() {
 		return materiales;
 	}
@@ -45,7 +49,23 @@ public class FiltroDTO {
 	public void setVariadades(List<VariedadSemilla> variadades) {
 		this.variadades = variadades;
 	}
-	
-	
+	public List<Material> getMaterialesPorEspecies() {
+		return materialesPorEspecies;
+	}
+	public void setMaterialesPorEspecies(List<Material> materialesPorEspecies) {
+		this.materialesPorEspecies = materialesPorEspecies;
+	}
+	public List<Material> getMaterialesPortipos() {
+		return materialesPortipos;
+	}
+	public void setMaterialesPortipos(List<Material> materialesPortipos) {
+		this.materialesPortipos = materialesPortipos;
+	}
+	public List<Material> getMaterialesPorVariedad() {
+		return materialesPorVariedad;
+	}
+	public void setMaterialesPorVariedad(List<Material> materialesPorVariedad) {
+		this.materialesPorVariedad = materialesPorVariedad;
+	}
 
 }

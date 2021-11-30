@@ -15,4 +15,9 @@ public List<Material> findAll();
 	
 	public void delete(Long id);
 
+	public List<Material> findByEspecie(Long idEspecie);
+	
+	public List<Material> findByTipo(Long idTipo);
+	
+	public List<Material> findByVariedad(Long idVariedad);
 }
