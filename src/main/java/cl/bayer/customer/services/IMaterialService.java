@@ -20,4 +20,6 @@ public List<Material> findAll();
 	public List<Material> findByTipo(Long idTipo);
 	
 	public List<Material> findByVariedad(Long idVariedad);
+	
+	public List<Material> findByEspecieByTipoByVariedad(Long idEspecie,Long idTipo,Long idVariedad);
 }

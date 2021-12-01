@@ -58,6 +58,12 @@ public class MaterialServiceImpl implements IMaterialService{
 	public List<Material> findByVariedad(Long idVariedad) {
 		return materialDao.listarMaterialesPorVariedad(idVariedad);
 	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<Material> findByEspecieByTipoByVariedad(Long idEspecie, Long idTipo, Long idVariedad) {
+		return materialDao.findByEspecieByTipoByVariedad(idEspecie, idTipo, idVariedad);
+	}
 
 	
 }

@@ -65,13 +65,12 @@ public class FiltroController {
 	@PostMapping("/lista-filtro/{idEspecie}/{idTipo}/{idVariedad}")
 	public ResponseEntity<FiltroDTO> listarFiltros(@PathVariable("idEspecie") Long idEspecie, @PathVariable("idTipo") Long idTipo, @PathVariable("idVariedad") Long idVariedad) {
 		FiltroDTO filtro = new FiltroDTO();
-		List<Material> materialesPorEspecie = serviceMaterial.findByEspecie(idEspecie);
-		List<Material> materialesPorTipo = serviceMaterial.findByTipo(idTipo);
-		List<Material> materialesPorVariedad = serviceMaterial.findByVariedad(idVariedad);
-		filtro.setMaterialesPorEspecies(materialesPorEspecie);
-		filtro.setMaterialesPortipos(materialesPorTipo);
-		filtro.setMaterialesPorVariedad(materialesPorVariedad);
-		if (!materialesPorEspecie.isEmpty() || !materialesPorTipo.isEmpty() || !materialesPorVariedad.isEmpty()) {
+		
+		List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipoByVariedad(idEspecie,idTipo,idVariedad);
+		filtro.setMaterialesPorEspecies(materialesPorEspeciePorVariedadPorTipo);
+		
+
+		if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");

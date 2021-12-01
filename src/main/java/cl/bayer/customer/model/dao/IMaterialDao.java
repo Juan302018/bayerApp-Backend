@@ -18,5 +18,8 @@ public interface IMaterialDao extends CrudRepository<Material, Long> {
 	
 	@Query("from Material mate where mate.variedadSemilla.id =:idVariedad")
 	List<Material> listarMaterialesPorVariedad(@Param("idVariedad") Long idVariedad);
+	
+	@Query("from Material mate where mate.especieSemilla.id =:idEspecie and mate.tipoSemilla.id =:idTipo and mate.variedadSemilla.id =:idVariedad")
+	public List<Material> findByEspecieByTipoByVariedad(@Param("idEspecie") Long idEspecie, @Param("idTipo") Long idTipo, @Param("idVariedad") Long idVariedad);
 
 }
