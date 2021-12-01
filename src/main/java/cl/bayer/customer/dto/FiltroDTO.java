@@ -5,19 +5,20 @@ import java.util.List;
 import cl.bayer.customer.model.entity.Envase;
 import cl.bayer.customer.model.entity.EspecieSemilla;
 import cl.bayer.customer.model.entity.Material;
+import cl.bayer.customer.model.entity.PreciosPorMaterial;
 import cl.bayer.customer.model.entity.TipoSemilla;
+import cl.bayer.customer.model.entity.Unidad;
 import cl.bayer.customer.model.entity.VariedadSemilla;
 
 public class FiltroDTO {
 	
 	private List<Material> materiales;
-	private List<Material> materialesPorEspecies;
-	private List<Material> materialesPortipos;
-	private List<Material> materialesPorVariedad;
 	private List<Envase> envases;
 	private List<EspecieSemilla> especies;
 	private List<TipoSemilla> tipos;
 	private List<VariedadSemilla> variadades;
+	private List<Unidad> unidades;
+	private List<PreciosPorMaterial> preciosPorMateriales;
 	
 	public List<Material> getMateriales() {
 		return materiales;
@@ -49,23 +50,17 @@ public class FiltroDTO {
 	public void setVariadades(List<VariedadSemilla> variadades) {
 		this.variadades = variadades;
 	}
-	public List<Material> getMaterialesPorEspecies() {
-		return materialesPorEspecies;
+	public List<Unidad> getUnidades() {
+		return unidades;
 	}
-	public void setMaterialesPorEspecies(List<Material> materialesPorEspecies) {
-		this.materialesPorEspecies = materialesPorEspecies;
+	public void setUnidades(List<Unidad> unidades) {
+		this.unidades = unidades;
 	}
-	public List<Material> getMaterialesPortipos() {
-		return materialesPortipos;
+	public List<PreciosPorMaterial> getPreciosPorMateriales() {
+		return preciosPorMateriales;
 	}
-	public void setMaterialesPortipos(List<Material> materialesPortipos) {
-		this.materialesPortipos = materialesPortipos;
+	public void setPreciosPorMateriales(List<PreciosPorMaterial> preciosPorMateriales) {
+		this.preciosPorMateriales = preciosPorMateriales;
 	}
-	public List<Material> getMaterialesPorVariedad() {
-		return materialesPorVariedad;
-	}
-	public void setMaterialesPorVariedad(List<Material> materialesPorVariedad) {
-		this.materialesPorVariedad = materialesPorVariedad;
-	}
-
+	
 }

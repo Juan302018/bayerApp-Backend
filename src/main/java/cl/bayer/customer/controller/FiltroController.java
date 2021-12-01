@@ -17,12 +17,16 @@ import cl.bayer.customer.exception.ModelNotFoundException;
 import cl.bayer.customer.model.entity.Envase;
 import cl.bayer.customer.model.entity.EspecieSemilla;
 import cl.bayer.customer.model.entity.Material;
+import cl.bayer.customer.model.entity.PreciosPorMaterial;
 import cl.bayer.customer.model.entity.TipoSemilla;
+import cl.bayer.customer.model.entity.Unidad;
 import cl.bayer.customer.model.entity.VariedadSemilla;
 import cl.bayer.customer.services.IEnvaseService;
 import cl.bayer.customer.services.IEspecieService;
 import cl.bayer.customer.services.IMaterialService;
+import cl.bayer.customer.services.IPreciosPorMaterialService;
 import cl.bayer.customer.services.ITipoService;
+import cl.bayer.customer.services.IUnidadService;
 import cl.bayer.customer.services.IVariedadService;
 
 @RestController
@@ -44,6 +48,12 @@ public class FiltroController {
 	@Autowired
 	private IVariedadService serviceVariedad;
 	
+	@Autowired
+	private IUnidadService serviceUnidad;
+	
+	@Autowired
+	private IPreciosPorMaterialService servicePreciosPorMaterial;
+	
 	@GetMapping("/inicial")
 	public ResponseEntity<FiltroDTO> listaInicial() {
 		FiltroDTO filtro = new FiltroDTO();
@@ -52,19 +62,23 @@ public class FiltroController {
 		List<EspecieSemilla> especies = serviceEspecie.findAll();
 		List<TipoSemilla> tipos = serviceTipo.findAll();
 		List<VariedadSemilla> variadades = serviceVariedad.findAll();
+		List<Unidad> unidades = serviceUnidad.findAll();
+		List<PreciosPorMaterial> preciosPorMateriales = servicePreciosPorMaterial.findAll();
 		filtro.setMateriales(materiales);
 		filtro.setEnvases(envases);
 		filtro.setEspecies(especies);
 		filtro.setTipos(tipos);
 		filtro.setVariadades(variadades);
-		if ( !materiales.isEmpty() && !envases.isEmpty() && !especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty()) {
+		filtro.setUnidades(unidades);
+		filtro.setPreciosPorMateriales(preciosPorMateriales);
+		if ( !materiales.isEmpty() && !envases.isEmpty() && !especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty() && !unidades.isEmpty() && !preciosPorMateriales.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
 			}
 	}
 	
-	@PostMapping("/lista-filtro/{idEspecie}/{idTipo}/{idVariedad}")
+  /*	@PostMapping("/lista-filtro/{idEspecie}/{idTipo}/{idVariedad}")
 	public ResponseEntity<FiltroDTO> listarFiltros(@PathVariable("idEspecie") Long idEspecie, @PathVariable("idTipo") Long idTipo, @PathVariable("idVariedad") Long idVariedad) {
 		FiltroDTO filtro = new FiltroDTO();
 		List<Material> materialesPorEspecie = serviceMaterial.findByEspecie(idEspecie);
@@ -78,5 +92,6 @@ public class FiltroController {
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
 			}
-	}
+	}*/
+	
 	}
