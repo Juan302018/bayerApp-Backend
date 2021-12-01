@@ -3,12 +3,14 @@ package cl.bayer.customer.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cl.bayer.customer.model.dao.IPreciosPorMaterialDao;
 import cl.bayer.customer.model.entity.PreciosPorMaterial;
 import cl.bayer.customer.services.IPreciosPorMaterialService;
 
+@Service
 public class PreciosPorMaterialService implements IPreciosPorMaterialService{
 
 	@Autowired

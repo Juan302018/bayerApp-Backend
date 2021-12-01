@@ -2,8 +2,11 @@ package cl.bayer.customer.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import cl.bayer.customer.model.entity.PreciosPorMaterial;
 
+@Service
 public interface IPreciosPorMaterialService {
 	
 	public List<PreciosPorMaterial> findAll();

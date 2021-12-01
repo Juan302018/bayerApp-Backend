@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 
@@ -38,6 +39,7 @@ public class Compra implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_usuario",foreignKey = @ForeignKey(name = "FK_usuario"))
+	@JsonBackReference
 	private Usuario usuario;
 	
 	@Column(name = "fecha_compra")

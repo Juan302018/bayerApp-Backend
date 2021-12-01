@@ -70,7 +70,7 @@ public class FiltroController {
 		filtro.setVariadades(variadades);
 		filtro.setUnidades(unidades);
 		filtro.setPreciosPorMateriales(preciosPorMateriales);
-		if ( !materiales.isEmpty() && !envases.isEmpty() && !especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty() && !unidades.isEmpty() && !preciosPorMateriales.isEmpty()) {
+		if ( !materiales.isEmpty() || !envases.isEmpty() || !especies.isEmpty() || !tipos.isEmpty() || !variadades.isEmpty() || !unidades.isEmpty() || !preciosPorMateriales.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");

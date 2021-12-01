@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="precios_por_material")
 public class PreciosPorMaterial implements Serializable {
@@ -30,11 +32,13 @@ public class PreciosPorMaterial implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_envase_material",foreignKey = @ForeignKey(name = "FK_envase_material"))
+	@JsonBackReference
 	private EnvasePorMaterial envasePorMaterial;
 	
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_unidad",foreignKey = @ForeignKey(name = "FK_unidad"))
+	@JsonBackReference
 	private Unidad unidad;
 	
 	
