@@ -40,5 +40,12 @@ public class EnvaseServiceImpl implements IEnvaseService{
 		envaseDao.deleteById(id);
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional(readOnly=true)
+	public List<Envase> findListById(Long id) {
+		return (List<Envase>) envaseDao.findById(id).orElse(null);
+	}
 
 }
