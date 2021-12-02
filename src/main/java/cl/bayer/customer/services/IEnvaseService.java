@@ -13,6 +13,8 @@ public interface IEnvaseService {
 	public Envase save(Envase envase);
 	
 	public void delete(Long id);
+	
+	public List<Envase> findListById(Long id);
 
 
 }

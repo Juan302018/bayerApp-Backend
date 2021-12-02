@@ -19,6 +19,7 @@ public class FiltroDTO {
 	private List<VariedadSemilla> variadades;
 	private List<Unidad> unidades;
 	private List<PreciosPorMaterial> preciosPorMateriales;
+
 	
 	public List<Material> getMateriales() {
 		return materiales;
@@ -62,5 +63,7 @@ public class FiltroDTO {
 	public void setPreciosPorMateriales(List<PreciosPorMaterial> preciosPorMateriales) {
 		this.preciosPorMateriales = preciosPorMateriales;
 	}
+	
+	
 	
 }
