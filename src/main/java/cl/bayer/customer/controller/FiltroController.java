@@ -79,18 +79,34 @@ public class FiltroController {
 		List<Material> materiales = serviceMaterial.findAll();
 	    List<Envase> envases = serviceEnvase.findAll();
 		List<EspecieSemilla> especies = serviceEspecie.findAll();
-		List<TipoSemilla> tipos = serviceTipo.findAll();
-		List<VariedadSemilla> variadades = serviceVariedad.findAll();
+		List<TipoSemilla> tipoSemillas = serviceTipo.findAll();
+		List<VariedadSemilla> variedadSemillas = serviceVariedad.findAll();
 		List<Unidad> unidades = serviceUnidad.findAll();
 		List<PreciosPorMaterial> preciosPorMateriales = servicePreciosPorMaterial.findAll();
+		
+		for(int i=0;i<materiales.size();i++) {
+			Envase envase = serviceEnvase.findById(materiales.get(i).getCodigoEnvase());
+			EspecieSemilla especie = serviceEspecie.findById(materiales.get(i).getCodigoEspecie());
+			TipoSemilla tipoSemilla = serviceTipo.findById(materiales.get(i).getCodigoTipo());
+			VariedadSemilla variedadSemilla = serviceVariedad.findById(materiales.get(i).getCodigoVariedad());
+			Unidad unidad = serviceUnidad.findById(materiales.get(i).getCodigoUnidad());
+			PreciosPorMaterial precioPorMaterial = servicePreciosPorMaterial.findById(materiales.get(i).getCodigoPrecioMaterial());
+			envases.add(envase);
+			especies.add(especie);
+			tipoSemillas.add(tipoSemilla);
+			variedadSemillas.add(variedadSemilla);
+			unidades.add(unidad);
+			preciosPorMateriales.add(precioPorMaterial);
+			
+		}
 		filtro.setMateriales(materiales);
 		filtro.setEnvases(envases);
 		filtro.setEspecies(especies);
-		filtro.setTipos(tipos);
-		filtro.setVariadades(variadades);
+		filtro.setTipos(tipoSemillas);
+		filtro.setVariadades(variedadSemillas);
 		filtro.setUnidades(unidades);
 		filtro.setPreciosPorMateriales(preciosPorMateriales);
-		if ( !materiales.isEmpty() || !envases.isEmpty() || !especies.isEmpty() || !tipos.isEmpty() || !variadades.isEmpty() || !unidades.isEmpty() || !preciosPorMateriales.isEmpty()) {
+		if ( !materiales.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
