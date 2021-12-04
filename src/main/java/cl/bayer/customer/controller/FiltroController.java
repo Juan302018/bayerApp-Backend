@@ -113,46 +113,32 @@ public class FiltroController {
 			}
 	}
 	
-  @SuppressWarnings("null")
 @PostMapping("/lista-filtro/{idEspecie}/{idTipo}/{idVariedad}")
-	public ResponseEntity<FiltroDTO> listarFiltros(@PathVariable("idEspecie") Long idEspecie, @PathVariable("idTipo") Long idTipo, @PathVariable("idVariedad") Long idVariedad) {
-		FiltroDTO filtro = new FiltroDTO();
+	public ResponseEntity<List<Material>> listarFiltros(@PathVariable("idEspecie") Long idEspecie, @PathVariable("idTipo") Long idTipo, @PathVariable("idVariedad") Long idVariedad) {
+		
 		
 		List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipoByVariedad(idEspecie,idTipo,idVariedad);
-		filtro.setMateriales(materialesPorEspeciePorVariedadPorTipo);
-		List<Material> materialObtenido=filtro.getMateriales();
-		List<Envase> envases = new ArrayList<>();
-		List<EspecieSemilla> especies = new ArrayList<>();
-		List<TipoSemilla> tipoSemillas = new ArrayList<>();
-		List<VariedadSemilla> variedadSemillas = new ArrayList<>();
-		List<Unidad> unidades = new ArrayList<>();
-		List<PreciosPorMaterial> preciosPorMateriales = new ArrayList<>();
 		
-		for(int i=0;i<materialObtenido.size();i++) {
-			Envase envase = serviceEnvase.findById(materialObtenido.get(i).getCodigoEnvase());
-			EspecieSemilla especie = serviceEspecie.findById(materialObtenido.get(i).getCodigoEspecie());
-			TipoSemilla tipoSemilla = serviceTipo.findById(materialObtenido.get(i).getCodigoTipo());
-			VariedadSemilla variedadSemilla = serviceVariedad.findById(materialObtenido.get(i).getCodigoVariedad());
-			Unidad unidad = serviceUnidad.findById(materialObtenido.get(i).getCodigoUnidad());
-			PreciosPorMaterial precioPorMaterial = servicePreciosPorMaterial.findById(materialObtenido.get(i).getCodigoPrecioMaterial());
-			envases.add(envase);
-			especies.add(especie);
-			tipoSemillas.add(tipoSemilla);
-			variedadSemillas.add(variedadSemilla);
-			unidades.add(unidad);
-			preciosPorMateriales.add(precioPorMaterial);
+		for(int i=0;i<materialesPorEspeciePorVariedadPorTipo.size();i++) {
+			Envase envase = serviceEnvase.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoEnvase());
+			EspecieSemilla especie = serviceEspecie.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoEspecie());
+			TipoSemilla tipoSemilla = serviceTipo.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoTipo());
+			VariedadSemilla variedadSemilla = serviceVariedad.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoVariedad());
+			Unidad unidad = serviceUnidad.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoUnidad());
+			PreciosPorMaterial precioPorMaterial = servicePreciosPorMaterial.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoPrecioMaterial());
+			materialesPorEspeciePorVariedadPorTipo.get(i).setEnvase(envase);
+			materialesPorEspeciePorVariedadPorTipo.get(i).setEspecieSemilla(especie);
+			materialesPorEspeciePorVariedadPorTipo.get(i).setTipoSemilla(tipoSemilla);
+			materialesPorEspeciePorVariedadPorTipo.get(i).setVariedadSemilla(variedadSemilla);
+			materialesPorEspeciePorVariedadPorTipo.get(i).setUnidad(unidad);
+			materialesPorEspeciePorVariedadPorTipo.get(i).setPreciosPorMaterial(precioPorMaterial);
 			
 		}
-	
-		filtro.setEnvases(envases);
-		filtro.setEspecies(especies);
-		filtro.setTipos(tipoSemillas);
-		filtro.setVariadades(variedadSemillas);
-		filtro.setUnidades(unidades);
-		filtro.setPreciosPorMateriales(preciosPorMateriales);
+		
+		
 
 		if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
-			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
+			return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
 			}

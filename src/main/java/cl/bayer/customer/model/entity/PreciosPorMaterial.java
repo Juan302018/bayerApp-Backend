@@ -1,7 +1,9 @@
 package cl.bayer.customer.model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,9 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="precios_por_material")
@@ -40,6 +45,10 @@ public class PreciosPorMaterial implements Serializable {
 	@JoinColumn(name = "id_unidad",foreignKey = @ForeignKey(name = "FK_unidad"))
 	@JsonBackReference
 	private Unidad unidad;
+	
+	@OneToMany(mappedBy="preciosPorMaterial",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private List<Material> materiales;
 	
 	
 	@Column(name = "valor_unidad")

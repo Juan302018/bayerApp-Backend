@@ -38,7 +38,7 @@ public class Material implements Serializable{
 	@Column(name = "tamano_material")
 	private String tamanoMaterial;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_tipo",foreignKey = @ForeignKey(name = "fk_tipo_semilla_material"))
 	@JsonBackReference
 	private TipoSemilla tipoSemilla;
@@ -46,7 +46,7 @@ public class Material implements Serializable{
 	@Column(name="id_tipo", updatable=false, insertable=false) 
     private Long codigoTipo;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_especie",foreignKey = @ForeignKey(name = "fk_especie_semilla_material"))
 	@JsonBackReference
 	private EspecieSemilla especieSemilla;
@@ -54,7 +54,7 @@ public class Material implements Serializable{
 	@Column(name="id_especie", updatable=false, insertable=false) 
     private Long codigoEspecie;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_variedad",foreignKey = @ForeignKey(name = "fk_variedad_semilla_material"))
 	@JsonBackReference
 	private VariedadSemilla variedadSemilla;
@@ -62,7 +62,7 @@ public class Material implements Serializable{
 	@Column(name="id_variedad", updatable=false, insertable=false) 
     private Long codigoVariedad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_envase",foreignKey = @ForeignKey(name = "fk_envase_material"))
 	@JsonBackReference
 	private Envase envase;
@@ -70,7 +70,7 @@ public class Material implements Serializable{
 	@Column(name="id_envase", updatable=false, insertable=false) 
     private Long codigoEnvase;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_unidad",foreignKey = @ForeignKey(name = "fk_unidad_material"))
 	@JsonBackReference
 	private Unidad unidad;
@@ -78,7 +78,7 @@ public class Material implements Serializable{
 	@Column(name="id_unidad", updatable=false, insertable=false) 
     private Long codigoUnidad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_precio_material",foreignKey = @ForeignKey(name = "fk_precio_material"))
 	@JsonBackReference
 	private PreciosPorMaterial preciosPorMaterial;
@@ -206,5 +206,7 @@ public class Material implements Serializable{
 	public void setCodigoPrecioMaterial(Long codigoPrecioMaterial) {
 		this.codigoPrecioMaterial = codigoPrecioMaterial;
 	}
+	
+	
 	
 }
