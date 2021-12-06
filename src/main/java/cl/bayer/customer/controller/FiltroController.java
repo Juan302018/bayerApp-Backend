@@ -62,11 +62,11 @@ public class FiltroController {
 	    List<Envase> envases = serviceEnvase.findAll();*/
 		List<EspecieSemilla> especies = serviceEspecie.findAll();
 		List<TipoSemilla> tipos = serviceTipo.findAll();
-		List<VariedadSemilla> variadades = serviceVariedad.findAll();
+		List<VariedadSemilla> variedades = serviceVariedad.findAll();
 		filtro.setEspecies(especies);
 		filtro.setTipos(tipos);
-		filtro.setVariadades(variadades);
-		if (!especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty()) {
+		filtro.setVariedades(variedades);
+		if (!especies.isEmpty() && !tipos.isEmpty() && !variedades.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
@@ -77,20 +77,38 @@ public class FiltroController {
 	public ResponseEntity<FiltroDTO> listaTodos() {
 		FiltroDTO filtro = new FiltroDTO();
 		List<Material> materiales = serviceMaterial.findAll();
-	    List<Envase> envases = serviceEnvase.findAll();
-		List<EspecieSemilla> especies = serviceEspecie.findAll();
-		List<TipoSemilla> tipos = serviceTipo.findAll();
-		List<VariedadSemilla> variadades = serviceVariedad.findAll();
-		List<Unidad> unidades = serviceUnidad.findAll();
-		List<PreciosPorMaterial> preciosPorMateriales = servicePreciosPorMaterial.findAll();
 		filtro.setMateriales(materiales);
+		List<Material> materialObtenido=filtro.getMateriales();
+		List<Envase> envases = new ArrayList<>();
+		List<EspecieSemilla> especies = new ArrayList<>();
+		List<TipoSemilla> tipoSemillas = new ArrayList<>();
+		List<VariedadSemilla> variedadSemillas = new ArrayList<>();
+		List<Unidad> unidades = new ArrayList<>();
+		List<PreciosPorMaterial> preciosPorMateriales = new ArrayList<>();
+		
+		for(int i=0;i<materialObtenido.size();i++) {
+			Envase envase = serviceEnvase.findById(materialObtenido.get(i).getCodigoEnvase());
+			EspecieSemilla especie = serviceEspecie.findById(materialObtenido.get(i).getCodigoEspecie());
+			TipoSemilla tipoSemilla = serviceTipo.findById(materialObtenido.get(i).getCodigoTipo());
+			VariedadSemilla variedadSemilla = serviceVariedad.findById(materialObtenido.get(i).getCodigoVariedad());
+			Unidad unidad = serviceUnidad.findById(materialObtenido.get(i).getCodigoUnidad());
+			PreciosPorMaterial precioPorMaterial = servicePreciosPorMaterial.findById(materialObtenido.get(i).getCodigoPrecioMaterial());
+			envases.add(envase);
+			especies.add(especie);
+			tipoSemillas.add(tipoSemilla);
+			variedadSemillas.add(variedadSemilla);
+			unidades.add(unidad);
+			preciosPorMateriales.add(precioPorMaterial);
+			
+		}
+		
 		filtro.setEnvases(envases);
 		filtro.setEspecies(especies);
-		filtro.setTipos(tipos);
-		filtro.setVariadades(variadades);
+		filtro.setTipos(tipoSemillas);
+		filtro.setVariedades(variedadSemillas);
 		filtro.setUnidades(unidades);
 		filtro.setPreciosPorMateriales(preciosPorMateriales);
-		if ( !materiales.isEmpty() || !envases.isEmpty() || !especies.isEmpty() || !tipos.isEmpty() || !variadades.isEmpty() || !unidades.isEmpty() || !preciosPorMateriales.isEmpty()) {
+		if ( !materiales.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
@@ -131,7 +149,7 @@ public class FiltroController {
 		filtro.setEnvases(envases);
 		filtro.setEspecies(especies);
 		filtro.setTipos(tipoSemillas);
-		filtro.setVariadades(variedadSemillas);
+		filtro.setVariedades(variedadSemillas);
 		filtro.setUnidades(unidades);
 		filtro.setPreciosPorMateriales(preciosPorMateriales);
 

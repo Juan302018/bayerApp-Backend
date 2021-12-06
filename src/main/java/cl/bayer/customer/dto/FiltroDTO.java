@@ -16,7 +16,7 @@ public class FiltroDTO {
 	private List<Envase> envases;
 	private List<EspecieSemilla> especies;
 	private List<TipoSemilla> tipos;
-	private List<VariedadSemilla> variadades;
+	private List<VariedadSemilla> variedades;
 	private List<Unidad> unidades;
 	private List<PreciosPorMaterial> preciosPorMateriales;
 
@@ -46,10 +46,10 @@ public class FiltroDTO {
 		this.tipos = tipos;
 	}
 	public List<VariedadSemilla> getVariadades() {
-		return variadades;
+		return variedades;
 	}
-	public void setVariadades(List<VariedadSemilla> variadades) {
-		this.variadades = variadades;
+	public void setVariedades(List<VariedadSemilla> variedades) {
+		this.variedades = variedades;
 	}
 	public List<Unidad> getUnidades() {
 		return unidades;
