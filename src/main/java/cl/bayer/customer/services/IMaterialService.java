@@ -22,4 +22,10 @@ public List<Material> findAll();
 	public List<Material> findByVariedad(Long idVariedad);
 	
 	public List<Material> findByEspecieByTipoByVariedad(Long idEspecie,Long idTipo,Long idVariedad);
+	
+	public List<Material> findByEspecieByTipo(Long idEspecie,Long idTipo);
+	
+	public List<Material> findByEspecieByVariedad(Long idEspecie,Long idVariedad);
+	
+	public List<Material> findByTipoByVariedad(Long idTipo,Long idVariedad);
 }

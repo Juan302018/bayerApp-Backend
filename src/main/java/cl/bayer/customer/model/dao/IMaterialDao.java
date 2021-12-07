@@ -24,5 +24,14 @@ public interface IMaterialDao extends CrudRepository<Material, Long> {
 	
 	@Query(value="select * from material where id_especie =:idEspecie and id_tipo=:idTipo and id_variedad =:idVariedad",  nativeQuery=true)
 	public List<Material> findByEspecieByTipoByVariedad(@Param("idEspecie") Long idEspecie, @Param("idTipo") Long idTipo, @Param("idVariedad") Long idVariedad);
+	
+	@Query(value="select * from material where id_especie =:idEspecie and id_tipo=:idTipo",  nativeQuery=true)
+	public List<Material> findByEspecieByTipo(@Param("idEspecie") Long idEspecie, @Param("idTipo") Long idTipo);
+	
+	@Query(value="select * from material where id_especie =:idEspecie and id_variedad=:idVariedad",  nativeQuery=true)
+	public List<Material> findByEspecieByVariedad(@Param("idEspecie") Long idEspecie, @Param("idVariedad") Long idVariedad);
+	
+	@Query(value="select * from material where id_tipo =:idTipo and id_variedad=:idVariedad",  nativeQuery=true)
+	public List<Material> findByTipoByVariedad(@Param("idTipo") Long idTipo, @Param("idVariedad") Long idVariedad);
  
 }

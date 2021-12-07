@@ -58,7 +58,6 @@ public class FiltroController {
 		List<VariedadSemilla> variadades = serviceVariedad.findAll();
 		filtro.setEspecies(especies);
 		filtro.setTipos(tipos);
-		filtro.setVariadades(variadades);
 		if (!especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
@@ -112,6 +111,42 @@ public class FiltroController {
 		
 		if(idTipo != 0 && idVariedad != 0 && idEspecie != 0) {
 			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipoByVariedad(idEspecie,idTipo,idVariedad);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		
+		if(idTipo != 0 && idVariedad != 0 && idEspecie != 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipoByVariedad(idEspecie,idTipo,idVariedad);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		
+		if(idEspecie != 0 && idTipo != 0 && idVariedad == 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipo(idEspecie,idTipo);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		
+		if(idEspecie != 0 && idTipo == 0 && idVariedad != 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByVariedad(idEspecie,idVariedad);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		
+		if(idEspecie == 0 && idTipo != 0 && idVariedad != 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByTipoByVariedad(idTipo,idVariedad);
 			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
 				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
 			} else {
