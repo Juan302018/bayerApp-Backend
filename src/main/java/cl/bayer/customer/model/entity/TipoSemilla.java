@@ -21,6 +21,7 @@ import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="tipo_semilla")
@@ -41,13 +42,20 @@ public class TipoSemilla implements Serializable {
 	@JsonBackReference
 	private EspecieSemilla especieSemilla;
 	
-	@OneToMany(mappedBy="tipoSemilla",fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToMany(mappedBy="tipoSemilla",fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<Material> materiales;
 	
 	@NotEmpty
 	@Column(name="nombre_tipo")
 	private String nombreTipo;
+	
+	
+
+	public TipoSemilla() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;

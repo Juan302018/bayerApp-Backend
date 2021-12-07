@@ -38,9 +38,6 @@ public class FiltroController {
 	private IMaterialService serviceMaterial;
 	
 	@Autowired
-	private IEnvaseService serviceEnvase;
-	
-	@Autowired
 	private IEspecieService serviceEspecie;
 	
 	@Autowired
@@ -49,11 +46,7 @@ public class FiltroController {
 	@Autowired
 	private IVariedadService serviceVariedad;
 	
-	@Autowired
-	private IUnidadService serviceUnidad;
 	
-	@Autowired
-	private IPreciosPorMaterialService servicePreciosPorMaterial;
 	
 	@GetMapping("/inicial")
 	public ResponseEntity<FiltroDTO> listaInicial() {
@@ -74,40 +67,13 @@ public class FiltroController {
 	}
 	
 	@GetMapping("/todos")
-	public ResponseEntity<FiltroDTO> listaTodos() {
-		FiltroDTO filtro = new FiltroDTO();
+	public ResponseEntity<List<Material>> listaTodos() {
 		List<Material> materiales = serviceMaterial.findAll();
-	    List<Envase> envases = serviceEnvase.findAll();
-		List<EspecieSemilla> especies = serviceEspecie.findAll();
-		List<TipoSemilla> tipoSemillas = serviceTipo.findAll();
-		List<VariedadSemilla> variedadSemillas = serviceVariedad.findAll();
-		List<Unidad> unidades = serviceUnidad.findAll();
-		List<PreciosPorMaterial> preciosPorMateriales = servicePreciosPorMaterial.findAll();
+	    
 		
-		for(int i=0;i<materiales.size();i++) {
-			Envase envase = serviceEnvase.findById(materiales.get(i).getCodigoEnvase());
-			EspecieSemilla especie = serviceEspecie.findById(materiales.get(i).getCodigoEspecie());
-			TipoSemilla tipoSemilla = serviceTipo.findById(materiales.get(i).getCodigoTipo());
-			VariedadSemilla variedadSemilla = serviceVariedad.findById(materiales.get(i).getCodigoVariedad());
-			Unidad unidad = serviceUnidad.findById(materiales.get(i).getCodigoUnidad());
-			PreciosPorMaterial precioPorMaterial = servicePreciosPorMaterial.findById(materiales.get(i).getCodigoPrecioMaterial());
-			envases.add(envase);
-			especies.add(especie);
-			tipoSemillas.add(tipoSemilla);
-			variedadSemillas.add(variedadSemilla);
-			unidades.add(unidad);
-			preciosPorMateriales.add(precioPorMaterial);
-			
-		}
-		filtro.setMateriales(materiales);
-		filtro.setEnvases(envases);
-		filtro.setEspecies(especies);
-		filtro.setTipos(tipoSemillas);
-		filtro.setVariadades(variedadSemillas);
-		filtro.setUnidades(unidades);
-		filtro.setPreciosPorMateriales(preciosPorMateriales);
+		
 		if ( !materiales.isEmpty()) {
-			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
+			return new ResponseEntity<List<Material>>(materiales, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
 			}
@@ -117,31 +83,47 @@ public class FiltroController {
 	public ResponseEntity<List<Material>> listarFiltros(@PathVariable("idEspecie") Long idEspecie, @PathVariable("idTipo") Long idTipo, @PathVariable("idVariedad") Long idVariedad) {
 		
 		
-		List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipoByVariedad(idEspecie,idTipo,idVariedad);
-		
-		for(int i=0;i<materialesPorEspeciePorVariedadPorTipo.size();i++) {
-			Envase envase = serviceEnvase.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoEnvase());
-			EspecieSemilla especie = serviceEspecie.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoEspecie());
-			TipoSemilla tipoSemilla = serviceTipo.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoTipo());
-			VariedadSemilla variedadSemilla = serviceVariedad.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoVariedad());
-			Unidad unidad = serviceUnidad.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoUnidad());
-			PreciosPorMaterial precioPorMaterial = servicePreciosPorMaterial.findById(materialesPorEspeciePorVariedadPorTipo.get(i).getCodigoPrecioMaterial());
-			materialesPorEspeciePorVariedadPorTipo.get(i).setEnvase(envase);
-			materialesPorEspeciePorVariedadPorTipo.get(i).setEspecieSemilla(especie);
-			materialesPorEspeciePorVariedadPorTipo.get(i).setTipoSemilla(tipoSemilla);
-			materialesPorEspeciePorVariedadPorTipo.get(i).setVariedadSemilla(variedadSemilla);
-			materialesPorEspeciePorVariedadPorTipo.get(i).setUnidad(unidad);
-			materialesPorEspeciePorVariedadPorTipo.get(i).setPreciosPorMaterial(precioPorMaterial);
-			
+		if(idTipo == 0 && idVariedad == 0 && idEspecie != 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecie(idEspecie);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
 		}
+		
+		if(idTipo != 0 && idVariedad == 0 && idEspecie == 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByTipo(idTipo);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		
+		if(idTipo == 0 && idVariedad != 0 && idEspecie == 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByVariedad(idVariedad);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		
+		if(idTipo != 0 && idVariedad != 0 && idEspecie != 0) {
+			List<Material> materialesPorEspeciePorVariedadPorTipo = serviceMaterial.findByEspecieByTipoByVariedad(idEspecie,idTipo,idVariedad);
+			if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
+				return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA!");
+				}
+		}
+		return null;
+		
 		
 		
 
-		if (!materialesPorEspeciePorVariedadPorTipo.isEmpty()) {
-			return new ResponseEntity<List<Material>>(materialesPorEspeciePorVariedadPorTipo, HttpStatus.OK);
-		} else {
-			throw new ModelNotFoundException("DATA NO ENCONTRADA!");
-			}
+		
 	}
 	
 	}

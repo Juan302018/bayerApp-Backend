@@ -5,21 +5,24 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import cl.bayer.customer.model.entity.Material;
 
 public interface IMaterialDao extends CrudRepository<Material, Long> {
 
-	@Query("from Material mate where mate.especieSemilla.id =:idEspecie")
+	@Query(value="select * from material where id_especie =:idEspecie",nativeQuery=true)
 	List<Material> listarMaterialesPorEspecie(@Param("idEspecie") Long idEspecie);
 	
-	@Query("from Material mate where mate.tipoSemilla.id =:idTipo")
+	@Query(value="select * from material where id_tipo =:idTipo",nativeQuery=true)
 	List<Material> listarMaterialesPorTipo(@Param("idTipo") Long idTipo);
 	
-	@Query("from Material mate where mate.variedadSemilla.id =:idVariedad")
+	@Query(value="select * from material where id_variedad =:idVariedad",nativeQuery=true)
 	List<Material> listarMaterialesPorVariedad(@Param("idVariedad") Long idVariedad);
 	
-	@Query("from Material mate where mate.especieSemilla.id =:idEspecie and mate.tipoSemilla.id =:idTipo and mate.variedadSemilla.id =:idVariedad")
+	//@Query(value="select * from mw_issue where issue_date LIKE %:date% and target LIKE %:target% and context LIKE %:context% and text LIKE %:text% and cause LIKE %:cause% and issue_type LIKE %:type%", nativeQuery=true)
+	
+	@Query(value="select * from material where id_especie =:idEspecie and id_tipo=:idTipo and id_variedad =:idVariedad",  nativeQuery=true)
 	public List<Material> findByEspecieByTipoByVariedad(@Param("idEspecie") Long idEspecie, @Param("idTipo") Long idTipo, @Param("idVariedad") Long idVariedad);
  
 }

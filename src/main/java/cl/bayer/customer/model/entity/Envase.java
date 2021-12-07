@@ -3,6 +3,7 @@ package cl.bayer.customer.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -34,8 +36,9 @@ public class Envase implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(targetEntity=Material.class,mappedBy="envase",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	private List<Material> materiales = new ArrayList<>();
+	@OneToMany(mappedBy="envase",fetch=FetchType.LAZY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private List<Material> materiales;
 	
 	@NotEmpty
 	@Column(name = "tipo_envase")
@@ -43,6 +46,13 @@ public class Envase implements Serializable{
 	
 	@Column(name = "activo")
 	private Integer activo;
+	
+	
+
+	public Envase() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;

@@ -46,13 +46,19 @@ public class PreciosPorMaterial implements Serializable {
 	@JsonBackReference
 	private Unidad unidad;
 	
-	@OneToMany(mappedBy="preciosPorMaterial",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@OneToMany(mappedBy="preciosPorMaterial",fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Material> materiales;
-	
-	
+
 	@Column(name = "valor_unidad")
 	private int valorUnidad;
+	
+	
+
+
+	public PreciosPorMaterial() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 
 	public Long getId() {
