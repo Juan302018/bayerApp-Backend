@@ -55,10 +55,10 @@ public class FiltroController {
 	    List<Envase> envases = serviceEnvase.findAll();*/
 		List<EspecieSemilla> especies = serviceEspecie.findAll();
 		List<TipoSemilla> tipos = serviceTipo.findAll();
-		List<VariedadSemilla> variadades = serviceVariedad.findAll();
+		List<VariedadSemilla> variedades = serviceVariedad.findAll();
 		filtro.setEspecies(especies);
 		filtro.setTipos(tipos);
-		if (!especies.isEmpty() && !tipos.isEmpty() && !variadades.isEmpty()) {
+		if (!especies.isEmpty() && !tipos.isEmpty() && !variedades.isEmpty()) {
 			return new ResponseEntity<FiltroDTO>(filtro, HttpStatus.OK);
 		} else {
 			throw new ModelNotFoundException("DATA NO ENCONTRADA!");

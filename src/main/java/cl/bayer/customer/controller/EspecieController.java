@@ -21,7 +21,7 @@ import cl.bayer.customer.services.IEspecieService;
 
 @RestController
 @RequestMapping("/especie-semilla")
-public class EspcieController {
+public class EspecieController {
 	
 	@Autowired
 	private IEspecieService service;
