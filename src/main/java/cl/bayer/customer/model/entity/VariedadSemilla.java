@@ -1,7 +1,9 @@
 package cl.bayer.customer.model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +18,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="variedad_semilla")
@@ -35,10 +39,18 @@ public class VariedadSemilla implements Serializable {
 	@Column(name="nombre_variedad")
 	private String nombreVariedad;
 	
+	@OneToMany(mappedBy="variedadSemilla",fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private List<Material> materiales;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_tipo",foreignKey = @ForeignKey(name = "FK_tipo"))
-	@JsonBackReference
 	private TipoSemilla tipoSemilla;
+	
+	public VariedadSemilla() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;

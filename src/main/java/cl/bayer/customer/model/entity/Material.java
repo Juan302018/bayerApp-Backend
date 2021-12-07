@@ -2,6 +2,7 @@ package cl.bayer.customer.model.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,9 +16,16 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @Entity
 @Table(name="material")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties({"hibernate_lazy_initializer", "handler"})
 public class Material implements Serializable{
 
 	/**
@@ -38,54 +46,48 @@ public class Material implements Serializable{
 	@Column(name = "tamano_material")
 	private String tamanoMaterial;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_tipo",foreignKey = @ForeignKey(name = "fk_tipo_semilla_material"))
-	@JsonBackReference
 	private TipoSemilla tipoSemilla;
 	
-	@Column(name="id_tipo", updatable=false, insertable=false) 
-    private Long codigoTipo;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_especie",foreignKey = @ForeignKey(name = "fk_especie_semilla_material"))
-	@JsonBackReference
 	private EspecieSemilla especieSemilla;
 	
-	@Column(name="id_especie", updatable=false, insertable=false) 
-    private Long codigoEspecie;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_variedad",foreignKey = @ForeignKey(name = "fk_variedad_semilla_material"))
-	@JsonBackReference
 	private VariedadSemilla variedadSemilla;
 	
-	@Column(name="id_variedad", updatable=false, insertable=false) 
-    private Long codigoVariedad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_envase",foreignKey = @ForeignKey(name = "fk_envase_material"))
-	@JsonBackReference
 	private Envase envase;
 	
-	@Column(name="id_envase", updatable=false, insertable=false) 
-    private Long codigoEnvase;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_unidad",foreignKey = @ForeignKey(name = "fk_unidad_material"))
-	@JsonBackReference
 	private Unidad unidad;
 	
-	@Column(name="id_unidad", updatable=false, insertable=false) 
-    private Long codigoUnidad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_precio_material",foreignKey = @ForeignKey(name = "fk_precio_material"))
-	@JsonBackReference
 	private PreciosPorMaterial preciosPorMaterial;
 	
 	
-	@Column(name="id_precio_material", updatable=false, insertable=false) 
-    private Long codigoPrecioMaterial;
+	
+	
+
+	public Material() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getId() {
 		return id;
@@ -159,52 +161,8 @@ public class Material implements Serializable{
 		this.preciosPorMaterial = preciosPorMaterial;
 	}
 
-	public Long getCodigoTipo() {
-		return codigoTipo;
-	}
-
-	public void setCodigoTipo(Long codigoTipo) {
-		this.codigoTipo = codigoTipo;
-	}
-
-	public Long getCodigoEspecie() {
-		return codigoEspecie;
-	}
-
-	public void setCodigoEspecie(Long codigoEspecie) {
-		this.codigoEspecie = codigoEspecie;
-	}
-
-	public Long getCodigoVariedad() {
-		return codigoVariedad;
-	}
-
-	public void setCodigoVariedad(Long codigoVariedad) {
-		this.codigoVariedad = codigoVariedad;
-	}
-
-	public Long getCodigoEnvase() {
-		return codigoEnvase;
-	}
-
-	public void setCodigoEnvase(Long codigoEnvase) {
-		this.codigoEnvase = codigoEnvase;
-	}
-
-	public Long getCodigoUnidad() {
-		return codigoUnidad;
-	}
-
-	public void setCodigoUnidad(Long codigoUnidad) {
-		this.codigoUnidad = codigoUnidad;
-	}
-
-	public Long getCodigoPrecioMaterial() {
-		return codigoPrecioMaterial;
-	}
-
-	public void setCodigoPrecioMaterial(Long codigoPrecioMaterial) {
-		this.codigoPrecioMaterial = codigoPrecioMaterial;
-	}
+	
+	
+	
 	
 }
