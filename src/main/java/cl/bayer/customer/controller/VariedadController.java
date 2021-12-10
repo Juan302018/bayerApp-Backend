@@ -45,11 +45,15 @@ public class VariedadController {
 	
 	@PostMapping("/por-tipo/{idTipo}")
 	public ResponseEntity<List<VariedadSemilla>> buscarVaridadSemillaTipo(@PathVariable("idTipo") Long idTipo) {
-		List<VariedadSemilla> lista = service.findByTipoVariedad(idTipo);
-		if (!lista.isEmpty()) {
-			return new ResponseEntity<List<VariedadSemilla>>(lista, HttpStatus.OK);
+		if (idTipo != 0) {
+			List<VariedadSemilla> lista = service.findByTipoVariedad(idTipo);
+			if (!lista.isEmpty()) {
+				return new ResponseEntity<List<VariedadSemilla>>(lista, HttpStatus.OK);
+			} else {
+				throw new ModelNotFoundException("DATA NO ENCONTRADA! " + lista.isEmpty());
+			}
 		} else {
-			throw new ModelNotFoundException("DATA NO ENCONTRADA! " + lista.isEmpty());
+			return null;
 		}
 	}
 	
