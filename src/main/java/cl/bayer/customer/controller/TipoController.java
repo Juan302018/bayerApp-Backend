@@ -44,6 +44,16 @@ public class TipoController {
 		return ResponseEntity.created(location).build();
      }
 	
+	@PostMapping("/por-especie/{idEspecie}")
+	public ResponseEntity<List<TipoSemilla>> buscarTipoSemillaEspecie(@PathVariable("idEspecie") Long idEspecie) {
+		List<TipoSemilla> lista = service.findByIdEspecie(idEspecie);
+		if (!lista.isEmpty()) {
+			return new ResponseEntity<List<TipoSemilla>>(lista, HttpStatus.OK);
+		} else {
+			throw new ModelNotFoundException("DATA NO ENCONTRADA! " + lista.isEmpty());
+		}
+	}
+	
 	@PutMapping
 	public ResponseEntity<TipoSemilla> modificar(@RequestBody TipoSemilla tipoSemilla){
 		TipoSemilla objTipoSemilla = service.save(tipoSemilla);
@@ -59,5 +69,4 @@ public class TipoController {
 		service.delete(id);
 		return new ResponseEntity<TipoSemilla>(HttpStatus.OK);
 	}
-
 }

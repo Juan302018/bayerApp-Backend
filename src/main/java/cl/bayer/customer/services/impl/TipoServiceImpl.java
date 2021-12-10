@@ -40,4 +40,9 @@ public class TipoServiceImpl implements ITipoService{
 		
 	}
 
+	@Override
+	public List<TipoSemilla> findByIdEspecie(Long idEspecie) {
+		return tipoSemillaDao.findByEspecie(idEspecie);
+	}
+
 }

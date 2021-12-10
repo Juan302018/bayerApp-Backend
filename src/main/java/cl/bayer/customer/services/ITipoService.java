@@ -9,6 +9,8 @@ public interface ITipoService {
 		
 		public TipoSemilla findById(Long id);
 		
+		public List<TipoSemilla> findByIdEspecie(Long idEspecie);
+		
 		public TipoSemilla save(TipoSemilla tipoSemilla);
 		
 		public void delete(Long id);
