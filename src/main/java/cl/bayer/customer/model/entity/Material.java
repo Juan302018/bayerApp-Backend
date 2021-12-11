@@ -37,7 +37,7 @@ public class Material implements Serializable{
 	@Id
 	@Column(name = "id_material")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idMaterial;
 	
 	@NotNull
 	@Column(name = "codigo_material")
@@ -90,11 +90,11 @@ public class Material implements Serializable{
 	}
 
 	public Long getId() {
-		return id;
+		return idMaterial;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.idMaterial = id;
 	}
 
 	public Long getCodigoMaterial() {
