@@ -10,6 +10,8 @@ public interface IVariedadService {
 		
 		public VariedadSemilla findById(Long id);
 		
+		public List<VariedadSemilla> findByTipoVariedad(Long idTipo);
+		
 		public VariedadSemilla save(VariedadSemilla variedadSemilla);
 		
 		public void delete(Long id);

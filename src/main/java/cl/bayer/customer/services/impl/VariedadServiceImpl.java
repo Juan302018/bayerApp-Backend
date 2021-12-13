@@ -41,4 +41,9 @@ public class VariedadServiceImpl implements IVariedadService{
 		
 	}
 
+	@Override
+	public List<VariedadSemilla> findByTipoVariedad(Long idTipo) {
+		return variedadSemillaDao.findByTipo(idTipo);
+	}
+
 }

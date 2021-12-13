@@ -49,7 +49,6 @@ public class VariedadSemilla implements Serializable {
 	
 	public VariedadSemilla() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
