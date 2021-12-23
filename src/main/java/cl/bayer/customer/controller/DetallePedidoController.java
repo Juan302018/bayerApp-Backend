@@ -1,8 +1,10 @@
 package cl.bayer.customer.controller;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +56,8 @@ public class DetallePedidoController {
 	
 	@SuppressWarnings("unchecked")
 	@PostMapping(consumes={"application/json"})
-	public ResponseEntity<DetallePedido> registrar(@RequestBody List<DetallePedido> detallePedidoList){
-		
+	public ResponseEntity<Map<String, Object>> registrar(@RequestBody List<DetallePedido> detallePedidoList){
+		Map<String, Object> response = new HashMap<String, Object>();
 		Compra compra= new Compra();
 		
 		for (int i = 0; i < detallePedidoList.size(); i++) {
@@ -70,7 +72,9 @@ public class DetallePedidoController {
 	    }
 		
 	
-		return new ResponseEntity<DetallePedido>(HttpStatus.OK);
+		response.put("mensaje", "La compra ha sido creada con exito");
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
      }
 	
 	@PutMapping
