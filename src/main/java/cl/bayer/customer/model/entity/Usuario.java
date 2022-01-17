@@ -40,6 +40,10 @@ public class Usuario implements Serializable {
 	private String nombreUsuario;
 	
 	
+	@Column(name = "email")
+	private String emailUsuario;
+	
+	
 	@Column(length = 60)
 	private String password;
 
@@ -96,6 +100,14 @@ public class Usuario implements Serializable {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
+
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
 	}
 	
 	
