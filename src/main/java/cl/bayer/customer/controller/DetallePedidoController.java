@@ -71,7 +71,7 @@ public class DetallePedidoController {
 			service.save(detallePedido);
 	    }
 		
-	
+		response.put("idCompra",compra.getId());
 		response.put("mensaje", "La compra ha sido creada con exito");
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED) ;
