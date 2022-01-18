@@ -31,6 +31,8 @@ import cl.bayer.customer.services.IEnvaseService;
 import cl.bayer.customer.services.IMaterialService;
 import cl.bayer.customer.services.IVariedadService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 @RestController
 @RequestMapping("/detalle-pedido")
 public class DetallePedidoController {
@@ -59,6 +61,8 @@ public class DetallePedidoController {
 	public ResponseEntity<Map<String, Object>> registrar(@RequestBody List<DetallePedido> detallePedidoList){
 		Map<String, Object> response = new HashMap<String, Object>();
 		Compra compra= new Compra();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		compra.setFechaCompra(dtf.format(LocalDateTime.now()));
 		
 		for (int i = 0; i < detallePedidoList.size(); i++) {
 			DetallePedido detallePedido = detallePedidoList.get(i);

@@ -51,15 +51,11 @@ public class Compra implements Serializable {
 	private List<DetallePedido> detallePedido;
 	
 	@Column(name = "fecha_compra")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@NotNull
-	private Date fechaCompra;
+	private String fechaCompra;
 	
 	@Column(name = "fecha_entrega")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date fechaEntrega;
+	private String fechaEntrega;
 
 	public Long getId() {
 		return idCompra;
@@ -77,19 +73,19 @@ public class Compra implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Date getFechaCompra() {
+	public String getFechaCompra() {
 		return fechaCompra;
 	}
 
-	public void setFechaCompra(Date fechaCompra) {
-		this.fechaCompra = fechaCompra;
+	public void setFechaCompra(String string) {
+		this.fechaCompra = string;
 	}
 
-	public Date getFechaEntrega() {
+	public String getFechaEntrega() {
 		return fechaEntrega;
 	}
 
-	public void setFechaEntrega(Date fechaEntrega) {
+	public void setFechaEntrega(String fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
 	
