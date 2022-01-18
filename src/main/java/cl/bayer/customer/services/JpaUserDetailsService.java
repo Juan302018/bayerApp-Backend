@@ -23,8 +23,9 @@ import cl.bayer.customer.model.entity.Usuario;
 @Service("jpaUserDetailsService")
 	public class JpaUserDetailsService implements UserDetailsService{
 	
+	
 	@Autowired
-	private IUsuarioDao usuarioDao;
+	private IUsuarioService usuarioService;
 	
 	private Logger logger = LoggerFactory.getLogger(JpaUserDetailsService.class);
 
@@ -32,7 +33,7 @@ import cl.bayer.customer.model.entity.Usuario;
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-		Usuario usuario = usuarioDao.findByNombreUsuario(username);
+		Usuario usuario = usuarioService.findByNombreUsuario(username);
 		
 		if(usuario == null) {
 			logger.error("Error login: no existe el usuario '" + username + "'");
@@ -53,5 +54,6 @@ import cl.bayer.customer.model.entity.Usuario;
 		}
 		return new User(usuario.getNombreUsuario(), usuario.getPassword(), usuario.getEnabled(), true, true, true, authorities);
 	}
+
 
 }

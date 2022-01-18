@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cl.bayer.customer.model.entity.Role;
 
 @Entity
@@ -45,6 +47,7 @@ public class Usuario implements Serializable {
 	
 	
 	@Column(length = 60)
+	@JsonIgnore
 	private String password;
 
 	private Boolean enabled;
