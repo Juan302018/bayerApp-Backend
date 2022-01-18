@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cl.bayer.customer.model.entity.Role;
 
 @Entity
@@ -40,7 +42,12 @@ public class Usuario implements Serializable {
 	private String nombreUsuario;
 	
 	
+	@Column(name = "email")
+	private String emailUsuario;
+	
+	
 	@Column(length = 60)
+	@JsonIgnore
 	private String password;
 
 	private Boolean enabled;
@@ -96,6 +103,14 @@ public class Usuario implements Serializable {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
+
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
 	}
 	
 	

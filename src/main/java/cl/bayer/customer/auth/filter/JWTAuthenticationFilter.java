@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,7 +24,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cl.bayer.customer.model.dao.IUsuarioDao;
 import cl.bayer.customer.model.entity.Usuario;
+import cl.bayer.customer.services.IUsuarioService;
 import cl.bayer.customer.services.JWTService;
 import cl.bayer.customer.services.impl.JWTServiceImpl;
 
@@ -36,8 +40,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	private AuthenticationManager authenticationManager;
 	private JWTService jwtSertvice;
 	
-	
-
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTService jwtSertvice) {
 		this.authenticationManager = authenticationManager;
 		setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api/login","POST"));
@@ -96,7 +98,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		body.put("token", token);
 		body.put("user", (User) authResult.getPrincipal());
 		body.put("mensaje", String.format("Hola %s, has iniciado sesión con éxito !", ((User)authResult.getPrincipal()).getUsername()));
-		
 		response.getWriter().write(new ObjectMapper().writeValueAsString(body));
 		response.setStatus(200);
 		response.setContentType("application/json");
