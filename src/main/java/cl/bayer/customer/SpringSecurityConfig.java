@@ -1,6 +1,5 @@
 package cl.bayer.customer;
 
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import cl.bayer.customer.auth.filter.JWTAuthenticationFilter;
 import cl.bayer.customer.auth.filter.JWTAuthorizationFilter;
-import cl.bayer.customer.auth.handler.LoginSuccessHandler;
 import cl.bayer.customer.services.JpaUserDetailsService;
 import cl.bayer.customer.services.JWTService;
 
@@ -21,17 +19,12 @@ import cl.bayer.customer.services.JWTService;
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	@Autowired
-	private DataSource dataSource;
-
+	
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private LoginSuccessHandler successHandler;
 	
 	@Autowired
 	private JWTService jwtService;

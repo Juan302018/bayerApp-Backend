@@ -38,7 +38,7 @@ public class EnvaseController {
 	@PostMapping
 	public ResponseEntity<Envase> registrar(@RequestBody Envase envase){
 		Envase objEnvase = service.save(envase);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(envase.getId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(objEnvase.getId()).toUri();
 		return ResponseEntity.created(location).build();
      }
 	

@@ -1,6 +1,5 @@
 package cl.bayer.customer.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.bayer.customer.dto.FiltroDTO;
 import cl.bayer.customer.exception.ModelNotFoundException;
-import cl.bayer.customer.model.entity.Envase;
 import cl.bayer.customer.model.entity.EspecieSemilla;
 import cl.bayer.customer.model.entity.Material;
-import cl.bayer.customer.model.entity.PreciosPorMaterial;
 import cl.bayer.customer.model.entity.TipoSemilla;
-import cl.bayer.customer.model.entity.Unidad;
 import cl.bayer.customer.model.entity.VariedadSemilla;
-import cl.bayer.customer.services.IEnvaseService;
 import cl.bayer.customer.services.IEspecieService;
 import cl.bayer.customer.services.IMaterialService;
-import cl.bayer.customer.services.IPreciosPorMaterialService;
 import cl.bayer.customer.services.ITipoService;
-import cl.bayer.customer.services.IUnidadService;
 import cl.bayer.customer.services.IVariedadService;
 
 @RestController

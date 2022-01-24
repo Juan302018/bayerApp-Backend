@@ -1,14 +1,9 @@
 package cl.bayer.customer.services.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import cl.bayer.customer.model.dao.IEspecieSemillaDao;
 import cl.bayer.customer.model.dao.IUsuarioDao;
-import cl.bayer.customer.model.entity.EspecieSemilla;
 import cl.bayer.customer.model.entity.Usuario;
 import cl.bayer.customer.services.IUsuarioService;
 

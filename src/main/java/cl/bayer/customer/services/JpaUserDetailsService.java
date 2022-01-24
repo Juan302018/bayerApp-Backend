@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cl.bayer.customer.model.entity.Role;
 
-import cl.bayer.customer.model.dao.IUsuarioDao;
 import cl.bayer.customer.model.entity.Usuario;
 
 @Service("jpaUserDetailsService")

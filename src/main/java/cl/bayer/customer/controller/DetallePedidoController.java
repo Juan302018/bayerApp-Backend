@@ -1,9 +1,7 @@
 package cl.bayer.customer.controller;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,16 +16,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cl.bayer.customer.exception.ModelNotFoundException;
 import cl.bayer.customer.model.dao.IDetallePedidoDao;
 import cl.bayer.customer.model.entity.Compra;
 import cl.bayer.customer.model.entity.DetallePedido;
-import cl.bayer.customer.model.entity.Envase;
 import cl.bayer.customer.model.entity.Material;
 import cl.bayer.customer.model.entity.VariedadSemilla;
-import cl.bayer.customer.services.IEnvaseService;
 import cl.bayer.customer.services.IMaterialService;
 import cl.bayer.customer.services.IVariedadService;
 
@@ -56,7 +51,6 @@ public class DetallePedidoController {
 		}	
 	}
 	
-	@SuppressWarnings("unchecked")
 	@PostMapping(consumes={"application/json"})
 	public ResponseEntity<Map<String, Object>> registrar(@RequestBody List<DetallePedido> detallePedidoList){
 		Map<String, Object> response = new HashMap<String, Object>();
