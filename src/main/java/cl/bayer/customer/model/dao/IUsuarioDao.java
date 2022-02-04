@@ -13,5 +13,5 @@ public interface IUsuarioDao extends CrudRepository<Usuario, Long> {
 	public Usuario findByNombreUsuario(@Param("username") String username);
 
 	@Query(value="select * from usuario where email =:email",nativeQuery=true)
-	public Usuario findByEmailUsuario(String email);
+	public Usuario findByEmailUsuario(@Param("email") String email);
 }

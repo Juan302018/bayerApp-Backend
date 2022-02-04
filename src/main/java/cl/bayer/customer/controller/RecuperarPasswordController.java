@@ -79,11 +79,11 @@ public class RecuperarPasswordController {
 		usuarioService.save(usuario);
 		
 		EmailBody emailBody = new EmailBody();
-		emailBody.setSubject("Recuperación de contraseña de aplicacion Bayer Seminia");
+		emailBody.setSubject("Recuperación de contraseña aplicación Bayer Seminis");
 		emailBody.setEmail(email);
-		emailBody.setContent("Su nueva contraseña es " + randomString);
-		emailBody.setAverageContent(" .Por seguridad de la cuenta , no debe compartir esta contraseña.");
-		emailBody.setFooterContent("Por favor no responder a este correo.");
+		emailBody.setContent("Su nueva contraseña es " + randomString+".");
+		emailBody.setAverageContent("Por seguridad de la cuenta, no debe compartir esta contraseña.");
+		emailBody.setFooterContent("Por favor, no responder a este correo.");
         return emailService.sendEmail(emailBody);
     }
 

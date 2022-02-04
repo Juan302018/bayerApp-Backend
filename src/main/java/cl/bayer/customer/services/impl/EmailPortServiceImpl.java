@@ -36,7 +36,9 @@ public class EmailPortServiceImpl implements IEmailPortService {
             helper.setSubject(subject);
             sender.send(message);
             send = true;
+            System.out.println("Email: "+message);
             LOGGER.info("Mail enviado exitosamente!");
+            System.out.print("Email: "+message);
         } catch (MessagingException e) {
             LOGGER.error("Hubo un error al enviar el mail: {}", e);
         }
