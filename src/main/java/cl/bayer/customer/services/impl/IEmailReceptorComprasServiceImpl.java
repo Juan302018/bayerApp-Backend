@@ -2,6 +2,7 @@ package cl.bayer.customer.services.impl;
 
 import cl.bayer.customer.model.entity.EmailBody;
 import cl.bayer.customer.services.IEmailPortService;
+import cl.bayer.customer.services.IEmailReceptorComprasService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -13,20 +14,20 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailPortServiceImpl implements IEmailPortService {
+public class IEmailReceptorComprasServiceImpl implements IEmailReceptorComprasService {
 	
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailPortServiceImpl.class);
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(EmailPortServiceImpl.class);
+	
     @Autowired
     private JavaMailSender sender;
 
 	@Override
-	public boolean sendEmail(EmailBody emailBody) {
+	public boolean sendEmailReceptorCompras(EmailBody emailBody) {
         LOGGER.info("EmailBody: {}", emailBody.toString());
-        return sendEmailTool(emailBody.getContent(),emailBody.getAverageContent(),emailBody.getFooterContent(),emailBody.getEmail(), emailBody.getSubject());
+        return sendEmailReceptorCompras(emailBody.getContent(),emailBody.getAverageContent(),emailBody.getFooterContent(),emailBody.getEmail(), emailBody.getSubject());
 	}
 	
-	private boolean sendEmailTool(String textMessage, String textAverageMessage, String textFooterMessage, String email, String subject) {
+	private boolean sendEmailReceptorCompras(String textMessage, String textAverageMessage, String textFooterMessage, String email, String subject) {
 		boolean send = false;
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -36,13 +37,10 @@ public class EmailPortServiceImpl implements IEmailPortService {
             helper.setSubject(subject);
             sender.send(message);
             send = true;
-            System.out.println("Email: "+message);
             LOGGER.info("Mail enviado exitosamente!");
-            System.out.print("Email: "+message);
         } catch (MessagingException e) {
             LOGGER.error("Hubo un error al enviar el mail: {}", e);
         }
         return send;
 	}
-	
 }
